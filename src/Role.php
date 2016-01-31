@@ -24,12 +24,14 @@ class Role extends Model
 
     /**
      * morph users.
+     *
      * @var array
      */
     public static $morphes = [];
 
     /**
      * add define morphes.
+     *
      * @param string$className
      */
     public static function pushMorph($className)
@@ -40,6 +42,7 @@ class Role extends Model
 
     /**
      * get define morphes.
+     *
      * @return array
      */
     public static function getMorphes()
@@ -49,7 +52,9 @@ class Role extends Model
 
     /**
      * The morphed users that belong to the role.
-     * @param  string $key
+     *
+     * @param string $key
+     *
      * @return mixed
      */
     public function morphedUsers($key)
@@ -66,7 +71,8 @@ class Role extends Model
     /**
      * Get a relationship.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function getRelationValue($key)
