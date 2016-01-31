@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
 use Mockery as m;
 use Recca0120\Rbac\Authenticate;
-use Recca0120\Rbac\GateRegister;
+use Recca0120\Rbac\GateRegistrar;
 use Recca0120\Rbac\Node;
 use Recca0120\Rbac\Role;
 
@@ -15,6 +15,23 @@ class AuthTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $app = App::getInstance();
+
+        Schema::create('users', function (\Illuminate\Database\Schema\Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password', 60);
+            $table->rememberToken();
+            $table->timestamps();
+        });
+        Schema::create('members', function (\Illuminate\Database\Schema\Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password', 60);
+            $table->rememberToken();
+            $table->timestamps();
+        });
 
         $app->migrate('up');
 
@@ -39,13 +56,15 @@ class AuthTest extends PHPUnit_Framework_TestCase
             return $user;
         });
 
-        (new GateRegister($app[GateContract::class]))->sync();
+        (new GateRegistrar($app[GateContract::class]))->register();
     }
 
     public function tearDown()
     {
         // m::close();
         $app = App::getInstance();
+        Schema::drop('users');
+        Schema::drop('members');
         $app->migrate('down');
     }
 

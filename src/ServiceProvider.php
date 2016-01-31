@@ -24,7 +24,7 @@ class ServiceProvider extends BaseServiceProvider
     public function boot(GateContract $gate)
     {
         if ($this->app->runningInConsole() === false) {
-            (new GateRegister($gate))->sync();
+            (new GateRegistrar($gate))->register();
         }
     }
 

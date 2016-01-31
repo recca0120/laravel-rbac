@@ -3,11 +3,11 @@
 namespace Recca0120\Rbac;
 
 use Illuminate\Support\Str;
-use Recca0120\Rbac\Traits\Cachable;
+use Recca0120\Rbac\Traits\Cacheable;
 
 trait Authenticate
 {
-    use Cachable;
+    use Cacheable;
 
     public static function bootAuthenticate()
     {
@@ -51,7 +51,7 @@ trait Authenticate
      *
      * @return array
      */
-    public function getAbility()
+    public function getAbilities()
     {
         return $this->getNodesAttribute()
             ->filter(function ($node) {
@@ -73,7 +73,7 @@ trait Authenticate
     public function getAbilitiesAttribute()
     {
         return $this->cached('abilities', function () {
-            return $this->getAbility();
+            return $this->getAbilities();
         });
     }
 

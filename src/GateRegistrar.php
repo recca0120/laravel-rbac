@@ -4,14 +4,14 @@ namespace Recca0120\Rbac;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
-class GateRegister
+class GateRegistrar
 {
     public function __construct(GateContract $gate)
     {
         $this->gate = $gate;
     }
 
-    public function sync()
+    public function register()
     {
         $this->gate->before(function ($user) {
             if ($user->isSuperAdmin() === true) {

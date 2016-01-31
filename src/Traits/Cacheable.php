@@ -4,7 +4,7 @@ namespace Recca0120\Rbac\Traits;
 
 use Closure;
 
-trait Cachable
+trait Cacheable
 {
     /**
      * cached.
