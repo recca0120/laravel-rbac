@@ -18,6 +18,7 @@ class Node extends BaseNode
 
     /**
      * ability.
+     *
      * @return string
      */
     public function getAbilityAttribute()
@@ -48,8 +49,10 @@ class Node extends BaseNode
 
     /**
      * move to position.
-     * @param  int $parent
+     *
+     * @param int $parent
      * @param  int$position
+     *
      * @return bool
      */
     public function moveToPosition($parent, $position)

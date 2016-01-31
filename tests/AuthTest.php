@@ -31,7 +31,7 @@ class AuthTest extends PHPUnit_Framework_TestCase
             ->roles()
             ->sync([1]);
 
-        $member = Member::first()
+        Member::first()
             ->roles()
             ->sync([2]);
 
@@ -196,6 +196,22 @@ class AuthTest extends PHPUnit_Framework_TestCase
                 ],
             ],
         ]);
+    }
+
+    public function test_role_morphes()
+    {
+        $this->assertEquals([
+            'users'   => User::class,
+            'members' => Member::class,
+        ], Role::getMorphes());
+    }
+
+    public function test_role_has_user()
+    {
+        $this->assertEquals(
+            array_except(Role::first()->users()->first()->toArray(), 'pivot'),
+            User::first()->toArray()
+        );
     }
 
     public function test_user_is_superadmin()

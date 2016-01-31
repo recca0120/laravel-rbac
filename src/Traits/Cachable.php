@@ -8,15 +8,18 @@ trait Cachable
 {
     /**
      * cached.
+     *
      * @var mixed
      */
     public static $cached = [];
 
     /**
      * cached.
-     * @param  string  $key
-     * @param  Closure $closure
-     * @param  string  $driver
+     *
+     * @param string  $key
+     * @param Closure $closure
+     * @param string  $driver
+     *
      * @return mixed
      */
     public function cached($key, Closure $closure, $driver = 'static')

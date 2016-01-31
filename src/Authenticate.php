@@ -9,8 +9,14 @@ trait Authenticate
 {
     use Cachable;
 
+    public static function bootAuthenticate()
+    {
+        Role::pushMorph(static::class);
+    }
+
     /**
      * get nodes.
+     *
      * @return mixed
      */
     public function getNodes()
@@ -30,6 +36,7 @@ trait Authenticate
 
     /**
      * get nodes attributes.
+     *
      * @return mixed
      */
     public function getNodesAttribute()
@@ -41,6 +48,7 @@ trait Authenticate
 
     /**
      * get abilities.
+     *
      * @return array
      */
     public function getAbility()
@@ -59,6 +67,7 @@ trait Authenticate
 
     /**
      * get abilities attributes.
+     *
      * @return mixed
      */
     public function getAbilitiesAttribute()
@@ -84,7 +93,9 @@ trait Authenticate
 
     /**
      * check user role.
-     * @param  string $role
+     *
+     * @param string $role
+     *
      * @return bool
      */
     public function is($role)
@@ -99,8 +110,9 @@ trait Authenticate
     /**
      * Handle dynamic method calls into the model.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
