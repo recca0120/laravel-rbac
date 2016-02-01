@@ -19,8 +19,8 @@ class CreateNodesTable extends Migration
             $table->integer('rgt')->nullable();
             $table->integer('depth')->nullable();
 
-            $table->string('name');
-            $table->string('slug')->nullable();
+            $table->string('name')->nullable();
+            $table->string('slug')->unique();
             $table->string('icon')->nullable();
             $table->string('action')->nullable();
             $table->tinyInteger('level')->nullable();

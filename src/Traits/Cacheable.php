@@ -1,6 +1,6 @@
 <?php
 
-namespace Recca0120\Rbac\Traits;
+namespace Recca0120\RBAC\Traits;
 
 use Closure;
 

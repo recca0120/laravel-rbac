@@ -1,6 +1,6 @@
 <?php
 
-namespace Recca0120\Rbac;
+namespace Recca0120\RBAC;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;

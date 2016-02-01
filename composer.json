@@ -17,17 +17,13 @@
         "illuminate/support": "~5.1"
     },
     "require-dev": {
-        "illuminate/container": "~5.1",
-        "illuminate/database": "~5.1",
-        "illuminate/events": "~5.1",
-        "illuminate/hashing": "~5.1",
         "mockery/mockery": "0.9.*",
         "nesbot/carbon": "~1.20",
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": {
-            "Recca0120\\Rbac\\": "src/"
+            "Recca0120\\RBAC\\": "src/"
         }
     },
     "config": {
