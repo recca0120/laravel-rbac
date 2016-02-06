@@ -13,6 +13,7 @@ interface Node
 
     /**
      * get permission.
+     *
      * @return string
      */
     public function getPermission();

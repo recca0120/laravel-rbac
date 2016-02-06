@@ -18,6 +18,7 @@ class Node extends BaumNode implements NodeContract
      * 	1: directory
      *  2: controller
      *  3: action
+     *
      * @var array
      */
     protected $fillable = ['name', 'slug', 'icon', 'action', 'level'];

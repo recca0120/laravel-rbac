@@ -16,22 +16,12 @@ trait Morphable
     public function morphedByUser($key)
     {
         return $this->morphedByMany(
-            Morph::$morphes[$key],
+            Morph::get($key),
             'user',
             'user_roles',
             'role_id',
             'user_id'
         );
-    }
-
-    /**
-     * get morphes.
-     *
-     * @return array
-     */
-    public static function getMorphes()
-    {
-        return Morph::$morphes;
     }
 
     /**
@@ -43,7 +33,7 @@ trait Morphable
      */
     public function getRelationValue($key)
     {
-        if (isset(Morph::$morphes[$key]) === true) {
+        if (Morph::get($key) !== null) {
             return $this->getRelationshipFromMethod($key);
         }
 
@@ -53,13 +43,14 @@ trait Morphable
     /**
      * add morpph by user.
      *
-     * @param  string $method
-     * @param  array $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
     {
-        if (isset(Morph::$morphes[$method]) === true) {
+        if (Morph::get($method) !== null) {
             return $this->morphedByUser($method);
         }
 

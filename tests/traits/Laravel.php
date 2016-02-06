@@ -1,10 +1,10 @@
 <?php
 
-use \Illuminate\Hashing\BcryptHasher;
 use Illuminate\Container\Container;
-// use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\DatabaseServiceProvider;
+// use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;

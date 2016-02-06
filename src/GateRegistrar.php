@@ -13,19 +13,18 @@ class GateRegistrar
 
     public function register()
     {
-        $this->gate->before(function ($user) {
-            // if ($user->isSuperAdmin() === true) {
-                return true;
-            // }
-        });
-        // Node::with('parent')
-        //     ->where('level', '=', 3)
-        //     ->get()
-        //     ->each(function ($node) {
-        //         $ability = $node->ability;
-        //         $this->gate->define($ability, function ($user) use ($ability) {
-        //             return $user->abilities->contains('ability', $ability);
-        //         });
-        //     });
+        Node::with('parent')
+            ->where('level', '=', 'permission')
+            ->get()
+            ->each(function ($node) {
+                $this->gate->define($node->permission, function ($user) use ($node) {
+                    return $user->permissions->contains('permission', $node->permission);
+                });
+            });
+        // $this->gate->before(function ($user) {
+        //     if ($user->isSuperAdmin() === true) {
+        //         return true;
+        //     }
+        // });
     }
 }

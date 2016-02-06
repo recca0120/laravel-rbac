@@ -14,12 +14,12 @@ interface Role
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function permissions();
+    public function getPermissionsAttribute();
 
     /**
      * attach node.
      *
-     * @param  \Baum\Node|int|array $node
+     * @param \Baum\Node|int|array $node
      *
      * @return void
      */
@@ -28,7 +28,7 @@ interface Role
     /**
      * detach node.
      *
-     * @param  \Baum\Node|int|array $node
+     * @param \Baum\Node|int|array $node
      *
      * @return void
      */
@@ -37,7 +37,7 @@ interface Role
     /**
      * detach node.
      *
-     * @param  array $nodes
+     * @param array $nodes
      *
      * @return void
      */

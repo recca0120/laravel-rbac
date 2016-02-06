@@ -19,11 +19,11 @@ class CreateNodesTable extends Migration
             $table->integer('rgt')->nullable();
             $table->integer('depth')->nullable();
 
-            $table->string('name')->nullable();
-            $table->string('slug')->unique();
+            $table->string('name');
+            $table->string('slug')->nullable();
             $table->string('icon')->nullable();
             $table->string('action')->nullable();
-            $table->tinyInteger('level')->nullable();
+            $table->enum('level', ['directory', 'node', 'permission'])->nullable();
 
             $table->timestamps();
         });

@@ -2,12 +2,16 @@
 
 namespace Recca0120\RBAC\Traits;
 
+use Baum\Extensions\Eloquent\Collection;
 use Illuminate\Support\Str;
+use Recca0120\RBAC\Access\Authorizable;
 use Recca0120\RBAC\Morph;
 use Recca0120\RBAC\Role;
 
 trait UserTrait
 {
+    use Authorizable;
+
     /**
      * initialize morph.
      *
@@ -15,7 +19,7 @@ trait UserTrait
      */
     public static function bootUserTrait()
     {
-        Morph::pushMorph(static::class);
+        Morph::push(static::class);
     }
 
     /**
@@ -35,18 +39,19 @@ trait UserTrait
     /**
      * user nodes.
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Baum\Extensions\Eloquent\Collection
      */
     public function getNodes()
     {
-        return $this->roles()
-            ->with(['nodes' => function ($query) {
-                return $query->with('parent');
-            }])
-            ->get()
-            ->map(function ($role) {
-                return $role->nodes;
-            })->collapse();
+        $nodes = new Collection();
+        foreach ($this->roles as $role) {
+            $nodes = $nodes->merge($role->cachedNodes());
+        }
+        $nodes = $nodes->unique()->sortBy(function ($node) {
+            return $node->getLeft();
+        });
+
+        return $nodes;
     }
 
     /**
@@ -82,9 +87,20 @@ trait UserTrait
     }
 
     /**
+     * user has permission.
+     *
+     * @return bool
+     */
+    public function hasPermission($permission)
+    {
+        return $this->permissions->contains('permission', $permission);
+    }
+
+    /**
      * attach role.
      *
-     * @param  \Recca0120\RBAC\Role|array|id $role
+     * @param \Recca0120\RBAC\Role|array|id $role
+     *
      * @return void
      */
     public function attachRole($role)
@@ -101,7 +117,8 @@ trait UserTrait
     /**
      * detach role.
      *
-     * @param  \Recca0120\RBAC\Role|array|id $role
+     * @param \Recca0120\RBAC\Role|array|id $role
+     *
      * @return void
      */
     public function detachRole($role)
@@ -118,6 +135,7 @@ trait UserTrait
      * sync roles.
      *
      * @param  array
+     *
      * @return void
      */
     public function syncRoles($roles)
