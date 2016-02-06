@@ -84,7 +84,8 @@ trait UserTrait
     /**
      * attach role.
      *
-     * @param  \Recca0120\RBAC\Role|array|id $role
+     * @param \Recca0120\RBAC\Role|array|id $role
+     *
      * @return void
      */
     public function attachRole($role)
@@ -101,7 +102,8 @@ trait UserTrait
     /**
      * detach role.
      *
-     * @param  \Recca0120\RBAC\Role|array|id $role
+     * @param \Recca0120\RBAC\Role|array|id $role
+     *
      * @return void
      */
     public function detachRole($role)
@@ -118,6 +120,7 @@ trait UserTrait
      * sync roles.
      *
      * @param  array
+     *
      * @return void
      */
     public function syncRoles($roles)

@@ -23,6 +23,7 @@ trait NodeTrait
 
     /**
      * get permission.
+     *
      * @return string
      */
     public function getPermission()
@@ -40,6 +41,7 @@ trait NodeTrait
 
     /**
      * permission attribute.
+     *
      * @return string
      */
     public function getPermissionAttribute()

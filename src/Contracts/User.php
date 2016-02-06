@@ -15,6 +15,7 @@ interface User
      * The roles that belong to the user.
      */
     public function roles();
+
     /**
      * user nodes.
      *
@@ -46,7 +47,8 @@ interface User
     /**
      * attach role.
      *
-     * @param  \Recca0120\RBAC\Role|array|id $role
+     * @param \Recca0120\RBAC\Role|array|id $role
+     *
      * @return void
      */
     public function attachRole($role);
@@ -54,7 +56,8 @@ interface User
     /**
      * detach role.
      *
-     * @param  \Recca0120\RBAC\Role|array|id $role
+     * @param \Recca0120\RBAC\Role|array|id $role
+     *
      * @return void
      */
     public function detachRole($role);
@@ -63,6 +66,7 @@ interface User
      * sync roles.
      *
      * @param  array
+     *
      * @return void
      */
     public function syncRoles($roles);

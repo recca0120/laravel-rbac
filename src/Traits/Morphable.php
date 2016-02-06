@@ -53,8 +53,9 @@ trait Morphable
     /**
      * add morpph by user.
      *
-     * @param  string $method
-     * @param  array $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
