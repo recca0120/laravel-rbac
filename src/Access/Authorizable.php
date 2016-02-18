@@ -1,6 +1,10 @@
 <?php
 
-namespace Recca0120\RBAC;
+namespace Recca0120\RBAC\Access;
+
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Recca0120\RBAC\Node;
 
 trait Authorizable
 {
@@ -14,6 +18,21 @@ trait Authorizable
      */
     public function can($ability, $arguments = [])
     {
+        $app = Container::getInstance();
+        if (is_null($app) === false) {
+            $gate = $app->make(GateContract::class);
+            $allow = $gate->forUser($this)->check($ability, $arguments);
+            if ($allow === true || $gate->has($ability) === true) {
+                return $allow;
+            }
+        }
+
+        $permissions = Node::cachedPermissionNodes();
+        if ($permissions->contains('permission', $ability) === true) {
+            return $this->hasPermission($ability);
+        }
+
+        return true;
     }
 
     /**

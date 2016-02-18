@@ -16,10 +16,10 @@ class CreateRoleNodesTable extends Migration
             $table->integer('role_id')->unsigned();
             $table->integer('node_id')->unsigned();
 
-            // $table->foreign('user_id')->references('id')->on('users')
-            //     ->onUpdate('cascade')->onDelete('cascade');
-            // $table->foreign('role_id')->references('id')->on('roles')
-            //     ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('node_id')->references('id')->on('nodes')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('roles')
+                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->primary(['role_id', 'node_id']);
         });

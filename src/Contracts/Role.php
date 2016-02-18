@@ -14,7 +14,7 @@ interface Role
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function permissions();
+    public function getPermissionsAttribute();
 
     /**
      * attach node.
