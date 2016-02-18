@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Recca0120\\Rbac\\": "src/"
+            "Recca0120\\RBAC\\": "src/"
         }
     },
     "config": {

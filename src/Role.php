@@ -1,14 +1,13 @@
 <?php
 
-namespace Recca0120\Rbac;
+namespace Recca0120\RBAC;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Recca0120\Rbac\Traits\Slugable;
 
-class Role extends Model
+class Role extends Model implements RoleContract
 {
-    use Slugable;
+    use Slugable, RoleTrait;
 
     /**
      * The attributes that are mass assignable.
