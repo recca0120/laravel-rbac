@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Kalnoy\Nestedset\NestedSet;
 
 class CreateNodesTable extends Migration
 {
@@ -14,10 +15,7 @@ class CreateNodesTable extends Migration
     {
         Schema::create('nodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id')->nullable();
-            $table->integer('lft')->nullable();
-            $table->integer('rgt')->nullable();
-            $table->integer('depth')->nullable();
+            NestedSet::columns($table);
 
             $table->string('name');
             $table->string('slug')->nullable();

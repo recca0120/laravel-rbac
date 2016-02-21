@@ -3,20 +3,48 @@
 namespace Recca0120\RBAC\Traits;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
+use Kalnoy\Nestedset\NodeTrait as KalnoyNodeTrait;
 use Recca0120\RBAC\Role;
 
 trait NodeTrait
 {
-    use BaumExtend;
+    use KalnoyNodeTrait {
+        KalnoyNodeTrait::bootNodeTrait as KalnoyBootNodeTrait;
+    }
 
-    public static function bootNodeTrait()
+    public static $isBootTrait = false;
+
+    public static function boot()
     {
-        static::saved(function ($model) {
+        if (static::$isBootTrait === true) {
+            return;
+        }
+
+        static::KalnoyBootNodeTrait();
+        static::saving(function ($node) {
+            if ($node->level === 'node' && empty($node->slug) === true && empty($node->action) === false) {
+                list($controller) = explode('@', basename($node->action));
+                $slug = Str::snake(str_replace('Controller', '', $controller), '-');
+                $node->slug = $slug;
+            }
+        });
+
+        static::saved(function ($node) {
             foreach (['getCachedNodes', 'cachedPermissionNodes'] as $key) {
                 $cacheKey = static::class.$key;
                 Cache::driver('file')->forget($cacheKey);
             }
+            foreach ($node->roles as $role) {
+                $role->forgetCache();
+            }
         });
+
+        static::deleting(function ($node) {
+            $node->roles()->sync([]);
+        });
+
+        static::$isBootTrait = true;
     }
 
     /**
@@ -69,9 +97,11 @@ trait NodeTrait
     {
         $cacheKey = static::class.'getCachedNodes';
 
-        return Cache::driver('file')->rememberForever($cacheKey, function () {
-            return static::with('parent')
-                ->get();
+        return Cache::driver('array')->rememberForever($cacheKey, function () use ($cacheKey) {
+            return Cache::driver('file')->rememberForever($cacheKey, function () {
+                return static::with('parent')
+                    ->get();
+            });
         });
     }
 
@@ -84,10 +114,25 @@ trait NodeTrait
     {
         $cacheKey = static::class.'cachedPermissionNodes';
 
-        return Cache::driver('file')->rememberForever($cacheKey, function () {
-            return static::cachedNodes()->filter(function ($node) {
-                return is_null($node->permission) === false;
+        return Cache::driver('array')->rememberForever($cacheKey, function () use ($cacheKey) {
+            return Cache::driver('file')->rememberForever($cacheKey, function () {
+                return static::cachedNodes()->filter(function ($node) {
+                    return is_null($node->permission) === false;
+                });
             });
         });
+    }
+
+    public function move($parent, $position)
+    {
+        if ($parent instanceof static === false) {
+            $parent = static::find($parent);
+        }
+
+        $position = (int) $position;
+        $parent->prependNode($this);
+        if ($position > 0) {
+            $this->down($position);
+        }
     }
 }

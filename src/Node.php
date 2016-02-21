@@ -2,12 +2,12 @@
 
 namespace Recca0120\RBAC;
 
-use Baum\Node as BaumNode;
+use Illuminate\Database\Eloquent\Model;
 use Recca0120\RBAC\Contracts\Node as NodeContract;
 use Recca0120\RBAC\Traits\NodeTrait;
 use Recca0120\RBAC\Traits\Slugable;
 
-class Node extends BaumNode implements NodeContract
+class Node extends Model implements NodeContract
 {
     use Slugable, NodeTrait;
 

@@ -2,6 +2,7 @@
 
 namespace Recca0120\RBAC\Traits;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Recca0120\RBAC\Node;
 
@@ -11,11 +12,16 @@ trait RoleTrait
 
     public static function bootRoleTrait()
     {
-        static::saved(function ($model) {
+        static::saved(function ($role) {
             foreach (['cachedNodes'] as $key) {
-                $cacheKey = static::class.$key.$model->id;
+                $cacheKey = static::class.$key.$role->id;
                 Cache::driver('file')->forget($cacheKey);
             }
+        });
+
+        static::deleting(function ($role) {
+            $role->users()->sync([]);
+            $role->nodes()->sync([]);
         });
     }
 
@@ -36,8 +42,10 @@ trait RoleTrait
     {
         $cacheKey = static::class.'cachedNodes'.$this->id;
 
-        return Cache::driver('file')->rememberForever($cacheKey, function () {
-            return $this->nodes()->with('parent')->get();
+        return Cache::driver('array')->rememberForever($cacheKey, function () use ($cacheKey) {
+            return Cache::driver('file')->rememberForever($cacheKey, function () {
+                return $this->nodes()->with('parent')->get();
+            });
         });
     }
 
@@ -107,6 +115,10 @@ trait RoleTrait
     public function syncNodes($nodes)
     {
         if (empty($nodes) === false) {
+            if ($nodes instanceof Collection) {
+                $nodes = $nodes->toArray();
+            }
+
             $this->nodes()->sync(array_map(function ($node) {
                 if (is_object($node) === true) {
                     $node = $node->getKey();

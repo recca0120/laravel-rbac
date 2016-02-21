@@ -43,7 +43,7 @@ class RBACTest extends PHPUnit_Framework_TestCase
     {
         $parentNode = $this->mockNode('parent', 'node');
         $childNode = $this->mockNode('child', 'permission');
-        $childNode->makeChildOf($parentNode);
+        $parentNode->appendNode($childNode);
         $this->assertEquals($childNode->permission, 'parent-child');
         $node = $this->mockNode('c-a', 'permission');
         $this->assertEquals($node->permission, 'c-a');
@@ -53,7 +53,7 @@ class RBACTest extends PHPUnit_Framework_TestCase
     {
         $parentNode = $this->mockNode('parent', 'node');
         $childNode = $this->mockNode('child', 'permission');
-        $childNode->makeChildOf($parentNode);
+        $parentNode->appendNode($childNode);
         $this->assertEquals($childNode->permission, 'parent-child');
         $node = $this->mockNode('c-a', 'permission');
         $this->assertEquals($node->permission, 'c-a');
@@ -74,7 +74,7 @@ class RBACTest extends PHPUnit_Framework_TestCase
         $role2 = $this->mockRole(__FUNCTION__.'2');
         $parentNode = $this->mockNode('parent', 'node');
         $childNode = $this->mockNode('child', 'permission');
-        $childNode->makeChildOf($parentNode);
+        $parentNode->appendNode($childNode);
         $this->assertEquals($childNode->permission, 'parent-child');
         $node = $this->mockNode('c-a', 'permission');
         $this->assertEquals($node->permission, 'c-a');
@@ -120,7 +120,7 @@ class RBACTest extends PHPUnit_Framework_TestCase
         $role2 = $this->mockRole(__FUNCTION__.'2');
         $parentNode = $this->mockNode('parent', 'node');
         $childNode = $this->mockNode('child', 'permission');
-        $childNode->makeChildOf($parentNode);
+        $parentNode->appendNode($childNode);
         $this->assertEquals($childNode->permission, 'parent-child');
         $node = $this->mockNode('c-a', 'permission');
         $this->assertEquals($node->permission, 'c-a');

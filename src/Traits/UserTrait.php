@@ -2,16 +2,13 @@
 
 namespace Recca0120\RBAC\Traits;
 
-use Baum\Extensions\Eloquent\Collection;
 use Illuminate\Support\Str;
-use Recca0120\RBAC\Access\Authorizable;
+use Kalnoy\Nestedset\Collection;
 use Recca0120\RBAC\Morph;
 use Recca0120\RBAC\Role;
 
 trait UserTrait
 {
-    use Authorizable;
-
     /**
      * initialize morph.
      *
@@ -20,6 +17,10 @@ trait UserTrait
     public static function bootUserTrait()
     {
         Morph::push(static::class);
+
+        static::deleting(function ($user) {
+            $user->roles()->sync([]);
+        });
     }
 
     /**
@@ -48,7 +49,7 @@ trait UserTrait
             $nodes = $nodes->merge($role->cachedNodes());
         }
         $nodes = $nodes->unique()->sortBy(function ($node) {
-            return $node->getLeft();
+            return $node->getLft();
         });
 
         return $nodes;
@@ -141,6 +142,10 @@ trait UserTrait
     public function syncRoles($roles)
     {
         if (empty($roles) === false) {
+            if ($roles instanceof Collection) {
+                $roles = $roles->toArray();
+            }
+
             $this->roles()->sync(array_map(function ($role) {
                 if (is_object($role) === true) {
                     $role = $role->getKey();
