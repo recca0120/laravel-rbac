@@ -1,30 +1,22 @@
 <?php
 
-namespace Recca0120\RBAC;
+namespace Recca0120\Rbac;
 
-use Illuminate\Database\Eloquent\Model;
-use Recca0120\RBAC\Contracts\User as UserContract;
-use Recca0120\RBAC\Traits\UserTrait;
+use Recca0120\Rbac\Traits\UserTrait;
 
-class User extends Model implements UserContract
+class User extends Model
 {
     use UserTrait;
 
     /**
-     * The attributes that are mass assignable.
+     * roles.
      *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'username', 'group_id',
-    ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
+     * @method roles
      *
-     * @var array
+     * @return \Illuminte\Database\Eloquent\Collection
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }

@@ -2,9 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Kalnoy\Nestedset\NestedSet;
 
-class CreateNodesTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +12,11 @@ class CreateNodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('nodes', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            NestedSet::columns($table);
-
             $table->string('name');
-            $table->string('slug')->nullable();
-            $table->string('icon')->nullable();
-            $table->string('action')->nullable();
-            $table->enum('level', ['directory', 'node', 'permission'])->nullable();
-
+            $table->string('description');
+            $table->tinyInteger('sort')->unsigned()->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ class CreateNodesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('nodes');
+        Schema::drop('roles');
     }
 }

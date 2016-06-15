@@ -1,20 +1,46 @@
 <?php
 
-namespace Recca0120\RBAC;
+namespace Recca0120\Rbac;
 
 use Illuminate\Database\Eloquent\Model;
-use Recca0120\RBAC\Contracts\Role as RoleContract;
-use Recca0120\RBAC\Traits\RoleTrait;
-use Recca0120\RBAC\Traits\Slugable;
+use Recca0120\Rbac\Traits\RoleTrait;
 
-class Role extends Model implements RoleContract
+class Role extends Model
 {
-    use Slugable, RoleTrait;
+    use RoleTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = [
+        'name',
+        'description',
+        'sort',
+    ];
+
+    /**
+     * users.
+     *
+     * @method users
+     *
+     * @return \Illuminte\Database\Eloquent\Collection
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * permissions.
+     *
+     * @method permissions
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
+    }
 }

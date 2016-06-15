@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+var path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,5 +16,5 @@ elixir(function(mix) {
         'src/**/*',
         'tests/**/*',
         'database/migrations/**/*'
-    ]);
+    ], path.normalize('vendor/bin/phpunit') + ' --verbose');
 });

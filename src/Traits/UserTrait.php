@@ -1,195 +1,63 @@
 <?php
 
-namespace Recca0120\RBAC\Traits;
+namespace Recca0120\Rbac\Traits;
 
-use Illuminate\Support\Str;
-use Kalnoy\Nestedset\Collection;
-use Recca0120\RBAC\Morph;
-use Recca0120\RBAC\Role;
+use Illuminate\Support\Facades\Cache;
 
 trait UserTrait
 {
     /**
-     * initialize morph.
+     * bootUserTrait.
      *
-     * @return void
+     * @method bootUserTrait
      */
     public static function bootUserTrait()
     {
-        Morph::push(static::class);
-
-        static::deleting(function ($user) {
-            $user->roles()->sync([]);
+        static::saved(function ($model) {
+            Cache::forget(static::cacheKey().'cacheRoles'.$model->id);
         });
     }
 
     /**
-     * The roles that belong to the user.
-     */
-    public function roles()
-    {
-        return $this->morphToMany(
-            Role::class,
-            'user',
-            'user_roles',
-            'user_id',
-            'role_id'
-        );
-    }
-
-    /**
-     * user nodes.
+     * hasRole.
      *
-     * @return \Baum\Extensions\Eloquent\Collection
-     */
-    public function getNodes()
-    {
-        $nodes = new Collection();
-        foreach ($this->roles as $role) {
-            $nodes = $nodes->merge($role->cachedNodes());
-        }
-        $nodes = $nodes->unique()->sortBy(function ($node) {
-            return $node->getLft();
-        });
-
-        return $nodes;
-    }
-
-    /**
-     * user nodes attribute.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getNodesAttribute()
-    {
-        return $this->getNodes();
-    }
-
-    /**
-     * user permissions.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getPermissions()
-    {
-        return $this->nodes->filter(function ($node) {
-            return is_null($node->permission) === false;
-        });
-    }
-
-    /**
-     * user permissions attribute.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function getPermissionsAttribute()
-    {
-        return $this->getPermissions();
-    }
-
-    /**
-     * user has permission.
+     * @method hasRole
      *
      * @return bool
      */
-    public function hasPermission($permission)
+    public function hasRole($role)
     {
-        return $this->permissions->contains('permission', $permission);
-    }
-
-    /**
-     * attach role.
-     *
-     * @param \Recca0120\RBAC\Role|array|id $role
-     *
-     * @return void
-     */
-    public function attachRole($role)
-    {
-        if (is_object($role) === true) {
-            $role = $role->getKey();
-        } elseif (is_array($role) === true) {
-            $role = $role['id'];
+        $roles = $this->cachedRoles();
+        if (is_string($role) === true) {
+            return $roles->contains('name', $role);
         }
 
-        $this->roles()->attach($role);
+        return $role->intersect($roles)->count() > 0;
     }
 
     /**
-     * detach role.
+     * cachedRoles.
      *
-     * @param \Recca0120\RBAC\Role|array|id $role
+     * @method cachedRoles
      *
-     * @return void
+     * @return \Illuminte\Database\Eloquent\Collection
      */
-    public function detachRole($role)
+    protected function cachedRoles()
     {
-        if (is_object($role) === true) {
-            $role = $role->getKey();
-        } elseif (is_array($role) === true) {
-            $role = $role['id'];
-        }
-        $this->roles()->detach($role);
+        return Cache::rememberForever($this->cacheKey().'cacheRoles'.$this->id, function () {
+            return $this->roles;
+        });
     }
 
     /**
-     * sync roles.
+     * cacheKey.
      *
-     * @param  array
+     * @method cacheKey
      *
-     * @return void
+     * @return string
      */
-    public function syncRoles($roles)
+    public static function cacheKey()
     {
-        if (empty($roles) === false) {
-            if ($roles instanceof Collection) {
-                $roles = $roles->toArray();
-            }
-
-            $this->roles()->sync(array_map(function ($role) {
-                if (is_object($role) === true) {
-                    $role = $role->getKey();
-                } elseif (is_array($role) === true) {
-                    $role = $role['id'];
-                }
-
-                return $role;
-            }, $roles));
-        } else {
-            $this->roles()->detach();
-        }
-    }
-
-    /**
-     * check user role.
-     *
-     * @param string $role
-     *
-     * @return bool
-     */
-    public function is($role)
-    {
-        $roles = $this->roles;
-
-        return $roles->contains('slug', Str::slug($role));
-    }
-
-    /**
-     * Handle dynamic method calls into the model.
-     *
-     * @param string $method
-     * @param array  $parameters
-     *
-     * @return mixed
-     */
-    public function __call($method, $parameters)
-    {
-        if (Str::startsWith($method, 'is') === true) {
-            $role = substr($method, 2);
-
-            return $this->is($role);
-        }
-
-        return parent::__call($method, $parameters);
+        return 'Recca0120\Rbac\User';
     }
 }

@@ -24,11 +24,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Recca0120\\RBAC\\": "src/"
+            "Recca0120\\Rbac\\": "src/"
         }
     },
     "config": {
         "preferred-install": "dist"
-    },
-    "minimum-stability": "dev"
+    }
 }
