@@ -58,6 +58,6 @@ trait UserTrait
      */
     public static function cacheKey()
     {
-        return 'Recca0120\Rbac\User';
+        return static::class;
     }
 }

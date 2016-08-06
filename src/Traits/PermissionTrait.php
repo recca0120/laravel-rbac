@@ -48,7 +48,7 @@ trait PermissionTrait
      */
     public static function cacheKey()
     {
-        return 'Recca0120\Rbac\Permission';
+        return static::class;
     }
 
     /**
