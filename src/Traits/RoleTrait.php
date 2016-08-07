@@ -13,6 +13,6 @@ trait RoleTrait
     {
         static::saved(function ($model) {
             $model->permissions()->getRelated()->fireModelEvent('saved', false);
-        });
+        }, 99);
     }
 }

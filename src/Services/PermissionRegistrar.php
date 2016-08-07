@@ -70,13 +70,23 @@ class PermissionRegistrar
     protected function resourceAbilityMap()
     {
         return [
-            'index'   => 'view',
+            'index'   => 'show',
             'create'  => 'create',
             'store'   => 'create',
-            'show'    => 'view',
+            'show'    => 'show',
             'edit'    => 'update',
             'update'  => 'update',
-            'destroy' => 'delete',
+            'destroy' => 'destroy',
+            'view'    => 'show',
         ];
+        // return [
+        //     'index'   => 'view',
+        //     'create'  => 'create',
+        //     'store'   => 'create',
+        //     'show'    => 'view',
+        //     'edit'    => 'update',
+        //     'update'  => 'update',
+        //     'destroy' => 'delete',
+        // ];
     }
 }

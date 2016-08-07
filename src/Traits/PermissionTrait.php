@@ -18,7 +18,11 @@ trait PermissionTrait
     {
         static::saved(function ($model) {
             Cache::forget(static::cacheKey());
-        });
+        }, 99);
+
+        static::deleted(function () {
+            Cache::forget(static::cacheKey());
+        }, 99);
     }
 
     /**

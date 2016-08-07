@@ -15,7 +15,7 @@ trait UserTrait
     {
         static::saved(function ($model) {
             Cache::forget(static::cacheKey().'cacheRoles'.$model->id);
-        });
+        }, 99);
     }
 
     /**
