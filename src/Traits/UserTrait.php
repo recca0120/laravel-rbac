@@ -3,6 +3,7 @@
 namespace Recca0120\Rbac\Traits;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 trait UserTrait
 {
@@ -29,7 +30,9 @@ trait UserTrait
     {
         $roles = $this->cachedRoles();
         if (is_string($role) === true) {
-            return $roles->contains('name', $role);
+            return $roles->filter(function ($model) use ($role) {
+                return Str::slug($model->name) == $role;
+            })->count() > 0;
         }
 
         return $role->intersect($roles)->count() > 0;
