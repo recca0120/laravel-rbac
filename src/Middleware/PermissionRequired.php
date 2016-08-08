@@ -4,14 +4,14 @@ namespace Recca0120\Rbac\Middleware;
 
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard as GuardContract;
 use Recca0120\Rbac\Services\PermissionRegistrar;
 
 class PermissionRequired
 {
     private $permissionRegistrar;
 
-    public function __construct(PermissionRegistrar $permissionRegistrar, Guard $guard)
+    public function __construct(PermissionRegistrar $permissionRegistrar, GuardContract $guard)
     {
         $this->permissionRegistrar = $permissionRegistrar;
         $this->guard = $guard;
