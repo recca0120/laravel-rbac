@@ -52,7 +52,7 @@ trait PermissionTrait
      */
     public static function cacheKey()
     {
-        return static::class;
+        return self::class;
     }
 
     /**
