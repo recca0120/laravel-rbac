@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 trait UserTrait
 {
+    protected $hasRoles = [];
+
     /**
      * bootUserTrait.
      *
@@ -28,14 +30,18 @@ trait UserTrait
      */
     public function hasRole($role)
     {
+        if (isset($this->hasRoles[$role]) === true) {
+            return $this->hasRoles[$role];
+        }
+
         $roles = $this->cachedRoles();
         if (is_string($role) === true) {
-            return $roles->filter(function ($model) use ($role) {
+            return $this->hasRoles[$role] = $roles->filter(function ($model) use ($role) {
                 return Str::slug($model->name) == $role;
             })->count() > 0;
         }
 
-        return $role->intersect($roles)->count() > 0;
+        return $this->hasRoles[$role] = $role->intersect($roles)->count() > 0;
     }
 
     /**
