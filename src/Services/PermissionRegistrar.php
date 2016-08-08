@@ -45,17 +45,15 @@ class PermissionRegistrar
         if (is_null($permission) === true) {
             return true;
         }
-
         $user = $this->guard->user();
 
         return $user->hasRole($permission->roles);
     }
 
-    protected function getAbility($actionName)
+    public function getAbility($actionName)
     {
         list($controller, $method) = explode('@', $actionName);
         $name = str_plural(strtolower(preg_replace('/Controller$/i', '', class_basename($controller))));
-
         $resourceAbilityMap = $this->resourceAbilityMap();
         $method = (isset($resourceAbilityMap[$method]) === true) ? $resourceAbilityMap[$method] : $method;
 

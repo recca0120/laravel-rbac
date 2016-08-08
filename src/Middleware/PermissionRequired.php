@@ -4,15 +4,17 @@ namespace Recca0120\Rbac\Middleware;
 
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Auth\Guard;
 use Recca0120\Rbac\Services\PermissionRegistrar;
 
 class PermissionRequired
 {
     private $permissionRegistrar;
 
-    public function __construct(PermissionRegistrar $permissionRegistrar)
+    public function __construct(PermissionRegistrar $permissionRegistrar, Guard $guard)
     {
         $this->permissionRegistrar = $permissionRegistrar;
+        $this->guard = $guard;
     }
 
     /**
@@ -25,10 +27,19 @@ class PermissionRequired
      */
     public function handle($request, Closure $next)
     {
-        if ($this->permissionRegistrar->checkPermission($request->route()->getActionName()) === false) {
+        if ($this->isAllowed($request) === false) {
             throw new AuthorizationException('This action is unauthorized.');
         }
 
         return $next($request);
+    }
+
+    protected function isAllowed($request)
+    {
+        $user = $this->guard->user();
+        $actionName = $request->route()->getActionName();
+        $ability = $this->permissionRegistrar->getAbility($actionName);
+
+        return $user->can($ability);
     }
 }
