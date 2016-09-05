@@ -2,6 +2,7 @@
 
 namespace Recca0120\Rbac;
 
+use Illuminate\Database\Eloquent\Model;
 use Recca0120\Rbac\Traits\UserTrait;
 
 class User extends Model
@@ -18,5 +19,9 @@ class User extends Model
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function providers() {
+        return $this->hasMany(UserProvider::class);
     }
 }

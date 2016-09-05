@@ -2,8 +2,8 @@
 
 namespace Recca0120\Rbac\Services;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Contracts\Auth\Guard as GuardContract;
+use Illuminate\Contracts\Auth\Access\Gate;
+use Illuminate\Contracts\Auth\Guard;
 use Recca0120\Rbac\Permission;
 
 class PermissionRegistrar
@@ -16,11 +16,7 @@ class PermissionRegistrar
 
     private $request;
 
-    public function __construct(
-        Permission $permission,
-        GateContract $gate,
-        GuardContract $guard
-    ) {
+    public function __construct(Permission $permission, Gate $gate, Guard $guard) {
         $this->permission = $permission;
         $this->gate = $gate;
         $this->guard = $guard;
@@ -68,14 +64,14 @@ class PermissionRegistrar
     protected function resourceAbilityMap()
     {
         return [
-            'index'   => 'show',
-            'create'  => 'create',
-            'store'   => 'create',
-            'show'    => 'show',
-            'edit'    => 'update',
-            'update'  => 'update',
+            'index' => 'show',
+            'create' => 'create',
+            'store' => 'create',
+            'show' => 'show',
+            'edit' => 'update',
+            'update' => 'update',
             'destroy' => 'destroy',
-            'view'    => 'show',
+            'view' => 'show',
         ];
         // return [
         //     'index'   => 'view',

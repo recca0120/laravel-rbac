@@ -1,7 +1,7 @@
 #Laravel Rbac
 
 [![StyleCI](https://styleci.io/repos/50771702/shield?style=flat)](https://styleci.io/repos/50771702)
-[![Build Status](https://travis-ci.org/recca0120/rbac.svg)](https://travis-ci.org/recca0120/rbac)
+[![Build Status](https://travis-ci.org/recca0120/laravel-rbac.svg)](https://travis-ci.org/recca0120/laravel-rbac)
 [![Total Downloads](https://poser.pugx.org/recca0120/rbac/d/total.svg)](https://packagist.org/packages/recca0120/rbac)
 [![Latest Stable Version](https://poser.pugx.org/recca0120/rbac/v/stable.svg)](https://packagist.org/packages/recca0120/rbac)
 [![Latest Unstable Version](https://poser.pugx.org/recca0120/rbac/v/unstable.svg)](https://packagist.org/packages/recca0120/rbac)
