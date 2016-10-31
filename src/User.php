@@ -21,7 +21,8 @@ class User extends Model
         return $this->belongsToMany(Role::class);
     }
 
-    public function providers() {
+    public function providers()
+    {
         return $this->hasMany(UserProvider::class);
     }
 }

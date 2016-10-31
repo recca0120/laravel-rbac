@@ -34,13 +34,18 @@ trait PermissionTrait
      */
     public function cachedAll()
     {
-        return Cache::rememberForever(static::cacheKey(), function () {
-            return $this
-                ->defaultOrder()
-                ->with('parent')
-                ->with('roles')
-                ->get();
-        });
+        return $this
+            ->defaultOrder()
+            ->with('parent')
+            ->with('roles')
+            ->get();
+        // return Cache::rememberForever(static::cacheKey(), function () {
+        //     return $this
+        //         ->defaultOrder()
+        //         ->with('parent')
+        //         ->with('roles')
+        //         ->get();
+        // });
     }
 
     /**

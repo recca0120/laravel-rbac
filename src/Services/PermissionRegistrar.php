@@ -5,6 +5,7 @@ namespace Recca0120\Rbac\Services;
 use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Guard;
 use Recca0120\Rbac\Permission;
+use Illuminate\Support\Str;
 
 class PermissionRegistrar
 {
@@ -16,7 +17,8 @@ class PermissionRegistrar
 
     private $request;
 
-    public function __construct(Permission $permission, Gate $gate, Guard $guard) {
+    public function __construct(Permission $permission, Gate $gate, Guard $guard)
+    {
         $this->permission = $permission;
         $this->gate = $gate;
         $this->guard = $guard;
@@ -49,7 +51,7 @@ class PermissionRegistrar
     public function getAbility($actionName)
     {
         list($controller, $method) = explode('@', $actionName);
-        $name = str_plural(strtolower(preg_replace('/Controller$/i', '', class_basename($controller))));
+        $name = str_plural(strtolower(Str::snake(preg_replace('/Controller$/i', '', class_basename($controller)))));
         $resourceAbilityMap = $this->resourceAbilityMap();
         $method = (isset($resourceAbilityMap[$method]) === true) ? $resourceAbilityMap[$method] : $method;
 
