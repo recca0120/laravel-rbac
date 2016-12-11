@@ -2,8 +2,8 @@
 
 namespace Recca0120\Rbac\Traits;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 trait UserTrait
 {

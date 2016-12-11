@@ -2,8 +2,8 @@
 
 namespace Recca0120\Rbac;
 
-use Illuminate\Database\Eloquent\Model;
 use Recca0120\Rbac\Traits\UserTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {

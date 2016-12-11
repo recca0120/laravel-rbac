@@ -2,10 +2,10 @@
 
 namespace Recca0120\Rbac\Services;
 
-use Illuminate\Contracts\Auth\Access\Gate;
-use Illuminate\Contracts\Auth\Guard;
-use Recca0120\Rbac\Permission;
 use Illuminate\Support\Str;
+use Recca0120\Rbac\Permission;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Access\Gate;
 
 class PermissionRegistrar
 {

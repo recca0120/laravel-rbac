@@ -2,8 +2,8 @@
 
 namespace Recca0120\Rbac;
 
-use Illuminate\Database\Eloquent\Model;
 use Recca0120\Rbac\Traits\RoleTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
