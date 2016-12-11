@@ -3,9 +3,9 @@
 namespace Recca0120\Rbac\Middleware;
 
 use Closure;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Auth\Guard;
 use Recca0120\Rbac\Services\PermissionRegistrar;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class PermissionRequired
 {
