@@ -81,6 +81,7 @@ trait PermissionTrait
     /**
      * findOneByAs.
      *
+     * @param string $as
      * @return \Illuminte\Database\Eloquent\Collection
      */
     public function findOneByAs($as)
