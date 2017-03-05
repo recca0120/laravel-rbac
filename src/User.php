@@ -12,17 +12,10 @@ class User extends Model
     /**
      * roles.
      *
-     * @method roles
-     *
      * @return \Illuminte\Database\Eloquent\Collection
      */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
-    }
-
-    public function providers()
-    {
-        return $this->hasMany(UserProvider::class);
     }
 }

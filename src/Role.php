@@ -23,8 +23,6 @@ class Role extends Model
     /**
      * users.
      *
-     * @method users
-     *
      * @return \Illuminte\Database\Eloquent\Collection
      */
     public function users()
@@ -34,8 +32,6 @@ class Role extends Model
 
     /**
      * permissions.
-     *
-     * @method permissions
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */

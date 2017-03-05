@@ -11,8 +11,6 @@ trait PermissionTrait
 
     /**
      * bootPermissionTrait.
-     *
-     * @method bootPermissionTrait
      */
     public static function bootPermissionTrait()
     {
@@ -27,8 +25,6 @@ trait PermissionTrait
 
     /**
      * cacheAll.
-     *
-     * @method cachedAll
      *
      * @return \Illuminte\Database\Eloquent\Collection
      */
@@ -51,8 +47,6 @@ trait PermissionTrait
     /**
      * cacheKey.
      *
-     * @method cacheKey
-     *
      * @return string
      */
     public static function cacheKey()
@@ -62,8 +56,6 @@ trait PermissionTrait
 
     /**
      * findAllByDirectory.
-     *
-     * @method findAllByDirectory
      *
      * @return \Illuminte\Database\Eloquent\Collection
      */
@@ -77,8 +69,6 @@ trait PermissionTrait
     /**
      * findAllByPermission.
      *
-     * @method findAllByPermission
-     *
      * @return \Illuminte\Database\Eloquent\Collection
      */
     public function findAllByPermission()
@@ -90,8 +80,6 @@ trait PermissionTrait
 
     /**
      * findOneByAs.
-     *
-     * @method findOneByAs
      *
      * @return \Illuminte\Database\Eloquent\Collection
      */

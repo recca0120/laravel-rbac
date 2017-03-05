@@ -6,8 +6,6 @@ trait RoleTrait
 {
     /*
      * bootRoleTrait.
-     *
-     * @method bootRoleTrait
      */
     public static function bootRoleTrait()
     {

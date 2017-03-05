@@ -25,8 +25,6 @@ class Permission extends Model
     /**
      * roles.
      *
-     * @method roles
-     *
      * @return \Illuminte\Database\Eloquent\Collection
      */
     public function roles()

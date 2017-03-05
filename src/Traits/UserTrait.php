@@ -9,8 +9,6 @@ trait UserTrait
 {
     /**
      * bootUserTrait.
-     *
-     * @method bootUserTrait
      */
     public static function bootUserTrait()
     {
@@ -21,8 +19,6 @@ trait UserTrait
 
     /**
      * hasRole.
-     *
-     * @method hasRole
      *
      * @return bool
      */
@@ -41,8 +37,6 @@ trait UserTrait
     /**
      * cachedRoles.
      *
-     * @method cachedRoles
-     *
      * @return \Illuminte\Database\Eloquent\Collection
      */
     protected function cachedRoles()
@@ -54,8 +48,6 @@ trait UserTrait
 
     /**
      * cacheKey.
-     *
-     * @method cacheKey
      *
      * @return string
      */
