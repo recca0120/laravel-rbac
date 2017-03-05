@@ -9,14 +9,34 @@ use Illuminate\Contracts\Auth\Access\Gate;
 
 class PermissionRegistrar
 {
+    /**
+     * $permission.
+     *
+     * @var \Recca0120\Rbac\Permission
+     */
     private $permission;
 
+    /**
+     * $gate.
+     *
+     * @var \Illuminate\Contracts\Auth\Access\Gate
+     */
     private $gate;
 
+    /**
+     * $guard.
+     *
+     * @var \Illuminate\Contracts\Auth\Guard
+     */
     private $guard;
 
-    private $request;
-
+    /**
+     * __construct.
+     *
+     * @param \Recca0120\Rbac\Permission $permission
+     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
+     * @param \Illuminate\Contracts\Auth\Guard $guard
+     */
     public function __construct(Permission $permission, Gate $gate, Guard $guard)
     {
         $this->permission = $permission;
@@ -24,6 +44,9 @@ class PermissionRegistrar
         $this->guard = $guard;
     }
 
+    /**
+     * defineGate.
+     */
     public function defineGate()
     {
         $permissions = $this->permission->findAllByPermission();
@@ -36,6 +59,12 @@ class PermissionRegistrar
         }
     }
 
+    /**
+     * checkPermission.
+     *
+     * @param  string $actionName
+     * @return bool
+     */
     public function checkPermission($actionName)
     {
         $ability = $this->getAbility($actionName);
@@ -48,6 +77,12 @@ class PermissionRegistrar
         return $user->hasRole($permission->roles);
     }
 
+    /**
+     * getAbility.
+     *
+     * @param  string $actionName
+     * @return string
+     */
     public function getAbility($actionName)
     {
         list($controller, $method) = explode('@', $actionName);

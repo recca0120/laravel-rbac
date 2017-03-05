@@ -16,7 +16,7 @@ trait PermissionTrait
      */
     public static function bootPermissionTrait()
     {
-        static::saved(function ($model) {
+        static::saved(function () {
             Cache::forget(static::cacheKey());
         }, 99);
 
