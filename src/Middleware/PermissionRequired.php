@@ -39,7 +39,7 @@ class PermissionRequired
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -54,7 +54,7 @@ class PermissionRequired
     /**
      * isAllowed.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return bool
      */
     protected function isAllowed($request)

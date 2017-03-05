@@ -62,7 +62,7 @@ class PermissionRegistrar
     /**
      * checkPermission.
      *
-     * @param  string $actionName
+     * @param string $actionName
      * @return bool
      */
     public function checkPermission($actionName)
@@ -80,7 +80,7 @@ class PermissionRegistrar
     /**
      * getAbility.
      *
-     * @param  string $actionName
+     * @param string $actionName
      * @return string
      */
     public function getAbility($actionName)
