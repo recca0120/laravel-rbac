@@ -9,8 +9,26 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 class PermissionRequired
 {
+    /**
+     * $permissionRegistrar.
+     *
+     * @var \Recca0120\Rbac\Services\PermissionRegistrar
+     */
     private $permissionRegistrar;
 
+    /**
+     * $guard.
+     *
+     * @var \Illuminate\Contracts\Auth\Guard
+     */
+    private $guard;
+
+    /**
+     * __construct.
+     *
+     * @param \Recca0120\Rbac\Services\PermissionRegistrar $permissionRegistrar
+     * @param \Illuminate\Contracts\Auth\Guard $guard
+     */
     public function __construct(PermissionRegistrar $permissionRegistrar, Guard $guard)
     {
         $this->permissionRegistrar = $permissionRegistrar;
@@ -22,7 +40,6 @@ class PermissionRequired
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure                 $next
-     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -34,6 +51,12 @@ class PermissionRequired
         return $next($request);
     }
 
+    /**
+     * isAllowed.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return bool
+     */
     protected function isAllowed($request)
     {
         $user = $this->guard->user();
