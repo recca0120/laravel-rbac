@@ -8,3 +8,5 @@
 [![License](https://poser.pugx.org/recca0120/rbac/license.svg)](https://packagist.org/packages/recca0120/rbac)
 [![Monthly Downloads](https://poser.pugx.org/recca0120/rbac/d/monthly)](https://packagist.org/packages/recca0120/rbac)
 [![Daily Downloads](https://poser.pugx.org/recca0120/rbac/d/daily)](https://packagist.org/packages/recca0120/rbac)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/recca0120/recca0120/laravel-rbac/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/recca0120/recca0120/laravel-rbac/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/recca0120/recca0120/laravel-rbac/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/recca0120/recca0120/laravel-rbac/?branch=master)
