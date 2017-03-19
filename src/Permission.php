@@ -15,11 +15,7 @@ class Permission extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'type',
-        'icon',
-        'as',
-        'uses',
+        'name', 'type', 'icon', 'as', 'uses',
     ];
 
     /**

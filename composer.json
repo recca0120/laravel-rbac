@@ -27,7 +27,13 @@
             "Recca0120\\Rbac\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Recca0120\\Rbac\\Tests\\": "tests/"
+        }
+    },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true
     }
 }
