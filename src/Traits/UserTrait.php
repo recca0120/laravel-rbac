@@ -37,7 +37,7 @@ trait UserTrait
     /**
      * cachedRoles.
      *
-     * @return \Illuminte\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     protected function cachedRoles()
     {

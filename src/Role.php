@@ -21,7 +21,7 @@ class Role extends Model
     /**
      * users.
      *
-     * @return \Illuminte\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function users()
     {

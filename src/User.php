@@ -12,7 +12,7 @@ class User extends Model
     /**
      * roles.
      *
-     * @return \Illuminte\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function roles()
     {

@@ -26,7 +26,7 @@ trait PermissionTrait
     /**
      * cacheAll.
      *
-     * @return \Illuminte\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function cachedAll()
     {
@@ -57,7 +57,7 @@ trait PermissionTrait
     /**
      * findAllByDirectory.
      *
-     * @return \Illuminte\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function findAllByDirectory()
     {
@@ -69,7 +69,7 @@ trait PermissionTrait
     /**
      * findAllByPermission.
      *
-     * @return \Illuminte\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function findAllByPermission()
     {
@@ -82,7 +82,7 @@ trait PermissionTrait
      * findOneByAs.
      *
      * @param string $as
-     * @return \Illuminte\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function findOneByAs($as)
     {
