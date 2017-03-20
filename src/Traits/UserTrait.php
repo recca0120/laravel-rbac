@@ -8,16 +8,6 @@ use Illuminate\Support\Facades\Cache;
 trait UserTrait
 {
     /**
-     * bootUserTrait.
-     */
-    public static function bootUserTrait()
-    {
-        static::saved(function ($model) {
-            Cache::forget(static::cacheKey().'cacheRoles'.$model->id);
-        }, 99);
-    }
-
-    /**
      * hasRole.
      *
      * @return bool
