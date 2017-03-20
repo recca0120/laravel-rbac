@@ -34,4 +34,17 @@ class UserTest extends TestCase
         $user = new User();
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\BelongsToMany', $user->roles());
     }
+
+    public function testBootUserTrait()
+    {
+        User::setEventDispatcher(
+            $dispatcher = m::mock('Illuminate\Contracts\Events\Dispatcher')
+        );
+
+        $event = 'saved';
+        $name = User::class;
+        $dispatcher->shouldReceive('listen')->once()->with("eloquent.{$event}: {$name}", m::type('Closure'));
+
+        User::bootUserTrait();
+    }
 }
