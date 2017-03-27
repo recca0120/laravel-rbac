@@ -12,6 +12,14 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
+    protected function setUp()
+    {
+        // (new CreateRolesTable())->up();
+        // (new CreateRoleUserTable())->up();
+        // (new CreatePermissionsTable())->up();
+        // (new CreatePermissionRoleTable())->up();
+    }
+
     protected function tearDown()
     {
         // (new CreateRolesTable())->down();
@@ -19,14 +27,6 @@ class UserTest extends TestCase
         // (new CreatePermissionsTable())->down();
         // (new CreatePermissionRoleTable())->down();
         m::close();
-    }
-
-    protected function setUp()
-    {
-        // (new CreateRolesTable())->up();
-        // (new CreateRoleUserTable())->up();
-        // (new CreatePermissionsTable())->up();
-        // (new CreatePermissionRoleTable())->up();
     }
 
     public function testRoles()

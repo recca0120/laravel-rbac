@@ -35,6 +35,16 @@ trait UserTrait
     }
 
     /**
+     * cacheKey.
+     *
+     * @return string
+     */
+    public static function cacheKey()
+    {
+        return self::class;
+    }
+
+    /**
      * cachedRoles.
      *
      * @return \Illuminate\Database\Eloquent\Collection
@@ -44,15 +54,5 @@ trait UserTrait
         return Cache::rememberForever($this->cacheKey().'cacheRoles'.$this->id, function () {
             return $this->roles;
         });
-    }
-
-    /**
-     * cacheKey.
-     *
-     * @return string
-     */
-    public static function cacheKey()
-    {
-        return self::class;
     }
 }
